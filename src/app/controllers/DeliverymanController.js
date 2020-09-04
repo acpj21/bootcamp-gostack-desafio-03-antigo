@@ -44,7 +44,7 @@ class DeliverymanController {
             name: Yup.string().required(),
             email: Yup.string().email().required(),
             avatar_id: Yup.number(),
-            active: Yup.boolean(),
+            active: Yup.boolean().required(),
         });
 
         if (!(await schema.isValid(req.body))) {
@@ -83,6 +83,22 @@ class DeliverymanController {
         const { name } = await deliveryman.update(req.body);
 
         return res.json({ name, email, avatar_id, active });
+    }
+
+    async delete(req, res) {
+        const { id } = req.params;
+
+        const deliverymanExists = await Deliveryman.findByPk(id);
+
+        if (!deliverymanExists) {
+            return res.status(404).json({ error: 'Entregador não existe.' });
+        }
+
+        deliverymanExists.active = false;
+
+        await deliverymanExists.save();
+
+        return res.status(200).json({ message: 'Entregador deletado!' });
     }
 }
 
