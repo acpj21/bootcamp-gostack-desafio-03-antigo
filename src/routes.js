@@ -32,5 +32,6 @@ routes.put('/recipients/:id', RecipientController.update);
 
 // rotas para os entregadores (deliveryman)
 routes.get('/deliveryman', Deliveryman.index);
+routes.post('/deliveryman', Deliveryman.store);
 
 export default routes;
