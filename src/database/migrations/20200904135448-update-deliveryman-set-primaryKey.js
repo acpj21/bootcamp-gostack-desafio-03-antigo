@@ -1,6 +1,6 @@
 module.exports = {
     up: (queryInterface) => {
-        return queryInterface.addConstraint('deliveryman', {
+        return queryInterface.addConstraint('deliverymans', {
             fields: ['id'],
             type: 'primary key',
             name: 'couriers_pkey',
